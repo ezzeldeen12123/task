@@ -36,6 +36,17 @@
                     </div>
 
                     <div class="card-body">
+                        
+                        @if(!empty($errors->all()))
+                            <div class="alert alert-danger text-white bg-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <table class="table table-striped m-0">
                             <tbody>
 

@@ -20,7 +20,7 @@ class RegisterController extends BaseController
         $userExsist = User::where('user_name', request('user_name'))->orWhere('email', request('email'))->first();
 
         $usersCount = User::count();
-        
+
         if(!$userExsist) {
 
             $user = new User();
@@ -54,7 +54,7 @@ class RegisterController extends BaseController
             }
         }
         else {
-            return view('register')->with('error','User already exsists');;
+            return view('register')->withErrors('User already exsists.');
         }
     }
 }

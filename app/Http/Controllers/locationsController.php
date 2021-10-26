@@ -32,6 +32,8 @@ class LocationsController extends BaseController
     public function save() {
 
     	$numberOfLocations = Location::where('provider_id', request('provider_id'))->count();
+    	$user = User::find(request('provider_id'));
+        $locations = Location::where('provider_id', $user->id)->get();
 
     	if($numberOfLocations <= 5) {
 
@@ -40,11 +42,12 @@ class LocationsController extends BaseController
 	        $locations->latitude = request('latitude');
 	        $locations->longitude = request('longitude');
 	        $locations->save();
+
+	        return view('locations', compact('user', 'locations'));
 	    }
+	    else {
 
-        $user = User::find(request('provider_id'));
-        $locations = Location::where('provider_id', $user->id)->get();
-
-        return view('locations', compact('user', 'locations'));
+	    	return view('locations', compact('user', 'locations'))->withErrors("You already have 5 Locations,You can't add more.");
+	    }
     }
 }

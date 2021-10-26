@@ -11,6 +11,17 @@
                     <form method="post" action="register" aria-label="Login">
                         {{ csrf_field() }}
                         <div class="login-container">
+                            
+                            @if(!empty($errors->all()))
+                                <div class="alert alert-danger text-white bg-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                             <div class="row no-gutters">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                     <div class="login-box">
